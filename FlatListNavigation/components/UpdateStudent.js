@@ -1,66 +1,70 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
-import { Button, TextInput, View, StyleSheet, Text, TouchableOpacity } from 'react-native-web';
+import React, { useState } from 'react'
+import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native-web'
+import { useNavigation } from '@react-navigation/native'
 
-export default function AddStudent() {
-    const navigation = useNavigation();
-    const [name, setName] = useState();
-    const [age, setAge] = useState();
-    const [gender, setGender] = useState();
-    const [courseName, setCourseName] = useState();
-    const [id, setId] = useState();
-    const newStudent = {
-        name: name,
-        age: age,
-        gender: gender,
-        courseName: courseName,
-        id: id
-    }
+export default function UpdateStudent({ route }) {
+    const { student } = route.params
+    const navigation = useNavigation()
+    const [name, setName] = useState(student.name)
+    const [age, setAge] = useState(student.age)
+    const [gender, setGender] = useState(student.gender)
+    const [courseName, setCourseName] = useState(student.courseName)
+    const [id, setId] = useState(student.id)
+
+    const updatedStudent = {
+        name,
+        age,
+        gender,
+        courseName,
+        id,
+    };
 
     return (
         <View style={styles.container}>
             <Text style={styles.label}>Name:</Text>
             <TextInput
                 style={styles.input}
-                placeholder="Enter student name"
+                placeholder="Update student name"
                 value={name}
                 onChangeText={setName}
             />
             <Text style={styles.label}>Age:</Text>
             <TextInput
                 style={styles.input}
-                placeholder="Enter student age"
+                placeholder="Update student age"
                 value={age}
                 onChangeText={setAge}
+                keyboardType="numeric"
             />
             <Text style={styles.label}>Gender:</Text>
             <TextInput
                 style={styles.input}
-                placeholder="Enter student gender"
+                placeholder="Update student gender"
                 value={gender}
                 onChangeText={setGender}
             />
             <Text style={styles.label}>Course Name:</Text>
             <TextInput
                 style={styles.input}
-                placeholder="Enter student course name"
+                placeholder="Update student course name"
                 value={courseName}
                 onChangeText={setCourseName}
             />
             <Text style={styles.label}>ID:</Text>
             <TextInput
                 style={styles.input}
-                placeholder="Enter student id"
+                placeholder="Update student id"
                 value={id}
                 onChangeText={setId}
+                keyboardType="numeric"
             />
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
-                    navigation.navigate('StudentsList', { newStudent });
+                    navigation.navigate('Profile', { updatedStudent });
                 }}
             >
-                <Text style={styles.buttonText}>Add</Text>
+                <Text style={styles.buttonText}>Update</Text>
             </TouchableOpacity>
         </View>
     );
@@ -97,7 +101,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#007BFF',
         padding: 12,
         borderRadius: 8,
-        alignItems: 'center',
+        alignItems: 'cUpdate',
         marginTop: 10,
     },
     buttonText: {

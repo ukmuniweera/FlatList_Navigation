@@ -1,15 +1,30 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native-web';
+import { View, Text, Image, StyleSheet, Button } from 'react-native-web';
 
 export default function Profile({ route }) {
-    const { student } = route.params;
+    const { student, updatedStudent } = route.params || {};
+    const navigation = useNavigation();
+
+    const displayedStudent = updatedStudent || student;
+
     return (
         <View style={styles.container}>
-            <Image source={student.profilePic} style={styles.image} />
-            <Text style={styles.label}>Name: {student.name}</Text>
-            <Text style={styles.label}>Age: {student.age}</Text>
-            <Text style={styles.label}>Course: {student.courseName}</Text>
-            <Text style={styles.label}>Gender: {student.gender}</Text>
+            <Image
+                source={displayedStudent?.profilePic || { uri: 'https://via.placeholder.com/100' }}
+                style={styles.image}
+            />
+            <Text style={styles.label}>Name: {displayedStudent.name}</Text>
+            <Text style={styles.label}>Age: {displayedStudent.age}</Text>
+            <Text style={styles.label}>Course: {displayedStudent.courseName}</Text>
+            <Text style={styles.label}>Gender: {displayedStudent.gender}</Text>
+            <View style={styles.buttonContainer}>
+                <Button
+                    title="Update Student"
+                    onPress={() => navigation.navigate('Update', { student: displayedStudent })}
+                    color="#007BFF"
+                />
+            </View>
         </View>
     );
 }
@@ -38,5 +53,10 @@ const styles = StyleSheet.create({
         color: '#333',
         marginBottom: 10,
         fontWeight: 'bold',
+    },
+    buttonContainer: {
+        marginTop: 20,
+        borderRadius: 8,
+        overflow: 'hidden',
     },
 });
