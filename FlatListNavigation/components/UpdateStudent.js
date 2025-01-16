@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
-import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native-web'
-import { useNavigation } from '@react-navigation/native'
+import React, { useState } from 'react';
+import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function UpdateStudent({ route }) {
-    const { student } = route.params
-    const navigation = useNavigation()
-    const [name, setName] = useState(student.name)
-    const [age, setAge] = useState(student.age)
-    const [gender, setGender] = useState(student.gender)
-    const [courseName, setCourseName] = useState(student.courseName)
-    const [id, setId] = useState(student.id)
+    const { student } = route.params;
+    const navigation = useNavigation();
+    const [name, setName] = useState(student.name);
+    const [age, setAge] = useState(student.age);
+    const [gender, setGender] = useState(student.gender);
+    const [courseName, setCourseName] = useState(student.courseName);
+    const [id, setId] = useState(student.id);
 
     const updatedStudent = {
         name,
@@ -59,7 +59,7 @@ export default function UpdateStudent({ route }) {
                 keyboardType="numeric"
             />
             <TouchableOpacity
-                style={styles.button}
+                style={styles.buttonContainer}
                 onPress={() => {
                     navigation.navigate('Profile', { updatedStudent });
                 }}
@@ -97,11 +97,11 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         backgroundColor: '#fff',
     },
-    button: {
+    buttonContainer: {
         backgroundColor: '#007BFF',
         padding: 12,
         borderRadius: 8,
-        alignItems: 'cUpdate',
+        alignItems: 'center',
         marginTop: 10,
     },
     buttonText: {

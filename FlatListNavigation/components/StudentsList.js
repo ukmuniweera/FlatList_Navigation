@@ -15,6 +15,13 @@ export default function StudentsList({ route }) {
         }
     }, [route.params?.newStudent]);
 
+    React.useEffect(() => {
+        if (route.params?.deletedStudent) {
+            const { deletedStudent } = route.params;
+            setStudents((prev) => prev.filter((student) => student.id !== deletedStudent.id));
+        }
+    }, [route.params?.deletedStudent]);
+
     return (
         <View style={styles.container}>
             <FlatList

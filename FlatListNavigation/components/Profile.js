@@ -8,6 +8,10 @@ export default function Profile({ route }) {
 
     const displayedStudent = updatedStudent || student;
 
+    const handleDelete = () => {
+        navigation.navigate('StudentsList', { deletedStudent: displayedStudent });
+    }
+
     return (
         <View style={styles.container}>
             <Image
@@ -22,6 +26,13 @@ export default function Profile({ route }) {
                 <Button
                     title="Update Student"
                     onPress={() => navigation.navigate('Update', { student: displayedStudent })}
+                    color="#007BFF"
+                />
+            </View>
+            <View style={styles.buttonContainer}>
+                <Button
+                    title="Delete Student"
+                    onPress={handleDelete}
                     color="#007BFF"
                 />
             </View>
